@@ -1,0 +1,34 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #333;
+  color: white;
+  padding: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.searchBar {
+  flex-grow: 1;
+  margin: 0 1.6rem;
+}
+
+.searchBar input {
+  width: 100%;
+  padding: .8rem;
+  font-size: 1rem;
+}
+
+.cartIcon img {
+  width: 30px;
+  cursor: pointer;
+}

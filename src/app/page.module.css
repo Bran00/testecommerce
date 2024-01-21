@@ -1,0 +1,18 @@
+.main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem;
+  padding: 1.6rem;
+  margin-top: 6rem;
+}
+.product-card {
+  border: .1rem solid hsl(0, 0%, 80%);
+  padding: 1.6rem;
+  text-align: center;
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: .8rem;
+}
