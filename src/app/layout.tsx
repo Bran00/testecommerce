@@ -1,3 +1,4 @@
+'use client'
 import { Inter } from "next/font/google";
 import { ProductProvider } from "../contexts/ProductContext"
 import "./globals.css";
@@ -12,10 +13,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ProductProvider>
-        <Navbar />
-        <body className={inter.className}>{children}</body>
-      </ProductProvider>
+      <body className={inter.className}>
+        <ProductProvider>
+          <Navbar />
+          {children}
+        </ProductProvider>
+      </body>
     </html>
   )
 }
