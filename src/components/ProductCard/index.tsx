@@ -5,10 +5,10 @@ interface ProductCardProps {
   id: number
   name: string
   price: number
-  date: Date
+  date?: Date
 }
 
-const formatDate = (date: Date): string => {
+const formatDate = (date?: Date): string => {
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "long",
