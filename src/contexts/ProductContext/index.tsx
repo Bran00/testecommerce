@@ -1,77 +1,86 @@
-'use client'
-import React, { createContext, useState, useEffect, useContext, ReactNode } from "react"
+// contexts/ProductContext/index.tsx
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  ReactNode,
+} from "react"
+import { products as allProducts } from "../../constants"
 
 interface Product {
-  id: number;
-  name: string;
-  price: number;
+  id: number
+  name: string
+  price: number
 }
 
 interface CartItem {
-  product: Product;
-  quantity: number;
+  product: Product
+  quantity: number
 }
 
 interface ProductContextProps {
-  products: Product[];
-  cart: CartItem[];
-  addToCart: (product: Product) => void;
-  calculateTotal: () => number;
-  clearCart: () => void;
+  products: Product[]
+  cart: CartItem[]
+  addToCart: (productId: number, quantity: number) => void
+  calculateTotal: () => number
+  clearCart: () => void
 }
 
-const ProductContext = createContext<ProductContextProps | undefined>(undefined);
+const ProductContext = createContext<ProductContextProps | undefined>(undefined)
 
 export const ProductProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [products, setProducts] = useState<Product[]>(() => {
-    const storedProducts = localStorage.getItem('products');
+  const [cart, setCart] = useState<CartItem[]>([])
+  const [products] = useState<Product[]>(allProducts)
 
-    if (storedProducts) {
-      return JSON.parse(storedProducts);
-    }
+  const addToCart = (productId: number, quantity: number) => {
+    const productToAdd = products.find((product) => product.id === productId)
 
-    return [
-      { id: 1, name: "Produto A", price: 20 },
-      { id: 2, name: "Produto B", price: 30 },
-      { id: 3, name: "Produto C", price: 25 },
-      { id: 4, name: "Produto D", price: 40 },
-    ];
-  });
+    if (productToAdd) {
+      const existingItem = cart.find((item) => item.product.id === productId)
 
-  const [cart, setCart] = useState<CartItem[]>([]);
-
-  const addToCart = (product: Product) => {
-    const existingItem = cart.find((item) => item.product.id === product.id);
-
-    if (existingItem) {
-      setCart(
-        cart.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+      if (existingItem) {
+        setCart((prevCart) =>
+          prevCart.map((item) =>
+            item.product.id === productId
+              ? { ...item, quantity: item.quantity + quantity }
+              : item
+          )
         )
-      );
-    } else {
-      setCart([...cart, { product, quantity: 1 }]);
+      } else {
+        const newCartItem: CartItem = {
+          product: productToAdd,
+          quantity: quantity,
+        }
+
+        setCart((prevCart) => [...prevCart, newCartItem])
+      }
     }
-  };
+  }
 
   const calculateTotal = () => {
     return cart.reduce(
       (total, item) => total + item.product.price * item.quantity,
       0
-    );
-  };
+    )
+  }
 
   const clearCart = () => {
-    setCart([]);
-  };
+    setCart([])
+  }
 
   useEffect(() => {
-    localStorage.setItem('products', JSON.stringify(products));
-  }, [products]);
+    try {
+      // Verifica se localStorage está disponível
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("cart", JSON.stringify(cart))
+      }
+    } catch (error) {
+      console.error("Erro ao salvar carrinho no localStorage:", error)
+    }
+  }, [cart])
 
   return (
     <ProductContext.Provider
@@ -79,13 +88,13 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({
     >
       {children}
     </ProductContext.Provider>
-  );
+  )
 }
 
 export const useProductContext = () => {
-  const context = useContext(ProductContext);
+  const context = useContext(ProductContext)
   if (!context) {
-    throw new Error("useProductContext must be used within a ProductProvider");
+    throw new Error("useProductContext must be used within a ProductProvider")
   }
-  return context;
+  return context
 }
