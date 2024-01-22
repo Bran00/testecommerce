@@ -1,4 +1,3 @@
-// contexts/ProductContext/index.tsx
 import React, {
   createContext,
   useState,
@@ -25,6 +24,8 @@ interface ProductContextProps {
   addToCart: (productId: number, quantity: number) => void
   calculateTotal: () => number
   clearCart: () => void
+  onSearch: (term: string) => Product[]
+  removeFromCart: (productId: number) => void
 }
 
 const ProductContext = createContext<ProductContextProps | undefined>(undefined)
@@ -71,6 +72,18 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({
     setCart([])
   }
 
+  const onSearch = (term: string): Product[] => {
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(term.toLowerCase())
+    )
+  }
+
+  const removeFromCart = (productId: number) => {
+    setCart((prevCart) =>
+      prevCart.filter((item) => item.product.id !== productId)
+    )
+  }
+
   useEffect(() => {
     try {
       // Verifica se localStorage está disponível
@@ -84,7 +97,15 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <ProductContext.Provider
-      value={{ products, cart, addToCart, calculateTotal, clearCart }}
+      value={{
+        products,
+        cart,
+        addToCart,
+        calculateTotal,
+        clearCart,
+        onSearch,
+        removeFromCart,
+      }}
     >
       {children}
     </ProductContext.Provider>
