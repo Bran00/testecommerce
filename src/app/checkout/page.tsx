@@ -4,23 +4,24 @@ import styles from "./Checkout.module.css"
 import { useProductContext } from "../../contexts/ProductContext"
 
 export default function Checkout() {
-  const { cart, clearCart, calculateTotal } = useProductContext()
+  const { cart, clearCart, calculateTotal, removeFromCart } =
+    useProductContext()
+
+  const handleRemoveFromCart = (productId: number) => {
+    removeFromCart(productId)
+  }
 
   const handleCheckout = () => {
-    const storedCartDetails = localStorage.getItem("purchaseDetails")
-    if (!storedCartDetails) {
+    const storedCartDetails = cart.length
+    if (storedCartDetails <= 0 ) {
       alert("Erro: Carrinho vazio. Não é possível finalizar a compra.")
       return
     }
 
-    const purchaseDetails = JSON.parse(storedCartDetails)
-
-    console.log("Detalhes da compra:", purchaseDetails)
-
     clearCart()
 
     alert(
-      "Compra finalizada com sucesso! Detalhes da compra exibidos no console."
+      "Compra finalizada com sucesso!"
     )
   }
 
@@ -33,6 +34,9 @@ export default function Checkout() {
           <div className={styles.cartItem} key={item.product.id}>
             <p>
               {item.product.name} - ${item.product.price} x {item.quantity}
+              <button onClick={() => handleRemoveFromCart(item.product.id)}>
+                Remover
+              </button>
             </p>
           </div>
         ))}
