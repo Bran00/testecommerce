@@ -36,6 +36,17 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({
   const [cart, setCart] = useState<CartItem[]>([])
   const [products] = useState<Product[]>(allProducts)
 
+  useEffect(() => {
+    try {
+      const storedCart = localStorage.getItem("cart")
+      if (storedCart) {
+        setCart(JSON.parse(storedCart))
+      }
+    } catch (error) {
+      console.error("Erro ao carregar carrinho do localStorage:", error)
+    }
+  }, [])
+
   const addToCart = (productId: number, quantity: number) => {
     const productToAdd = products.find((product) => product.id === productId)
 
@@ -86,7 +97,6 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     try {
-      // Verifica se localStorage está disponível
       if (typeof localStorage !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(cart))
       }
