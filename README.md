@@ -1,5 +1,7 @@
 # Teste E-commerce(Soja Nova)
 
+# <a href="https://testecommerce-rose.vercel.app/">Acesse a versão online AQUI</a>
+
 ## Descrição
 
 Este é um projeto de exemplo para um e-commerce desenvolvido com Next.js e React. O objetivo deste projeto é fornecer um exemplo simples de como criar uma aplicação de comércio eletrônico usando as tecnologias mencionadas.
@@ -11,6 +13,9 @@ Antes de começar, certifique-se de ter o Node.js instalado em sua máquina. Voc
 ## Instalação
 
 1. Clone o repositório:
+   ```bash
+   git clone https://github.com/Bran00/testecommerce
+   ```
 
 2. Acesse o diretório do projeto:
 
@@ -51,14 +56,6 @@ No diretório do projeto, você pode executar os seguintes scripts:
   ```
 
   Inicia o aplicativo compilado em modo de produção.
-
-- **Análise de Estilo de Código:**
-
-  ```bash
-  npm run lint
-  ```
-
-  Executa a análise de estilo de código usando o ESLint.
 
 ## Tecnologias Utilizadas
 
