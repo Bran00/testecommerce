@@ -1,9 +1,11 @@
 'use client'
 import React, { useEffect, useState } from "react"
-import styles from "./page.module.css"
 import ProductCard from "../components/ProductCard"
 import { products } from "../constants"
 import { useProductContext } from "@/contexts/ProductContext"
+
+import { IoSearchSharp } from "react-icons/io5"
+import styles from "./page.module.css"
 
 interface Product {
   id: number
@@ -106,36 +108,42 @@ export default function Home() {
     <main className={styles.main}>
       <section>
         <div>
-          <label htmlFor="sort">Ordenar por:</label>
-          <select id="sort" value={sortBy} onChange={handleSortChange}>
-            <option value="price">Preço</option>
-            <option value="date">Data de Inclusão</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="filter">Filtrar por:</label>
-          <select id="filter" value={filterBy} onChange={handleFilterChange}>
-            <option value="">Sem filtro</option>
-            <option value="price-10-40">Preço (entre $10 e $40)</option>
-            <option value="price-50-70">Preço (entre $50 e $70)</option>
-            <option value="price-80-100">Preço (entre $80 e $100)</option>
-            <option value="date-2023">Data de 2023</option>
-            <option value="date-2022">Data de 2022</option>
-          </select>
-        </div>
-        <div>
           <input
             type="text"
             placeholder="Pesquisar produtos..."
             value={searchTerm}
             onChange={handleSearchChange}
           />
-          <button onClick={handleSearch}>Pesquisar</button>
+          <p className={styles.icon}>
+            <IoSearchSharp />
+          </p>
+        </div>
+        <div className={styles.filters}>
+          <div>
+            <label htmlFor="sort">Ordenar por:</label>
+            <select id="sort" value={sortBy} onChange={handleSortChange}>
+              <option value="price">Preço</option>
+              <option value="date">Data de Inclusão</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="filter">Filtrar por:</label>
+            <select id="filter" value={filterBy} onChange={handleFilterChange}>
+              <option value="">Sem filtro</option>
+              <option value="price-10-40">Preço (entre $10 e $40)</option>
+              <option value="price-50-70">Preço (entre $50 e $70)</option>
+              <option value="price-80-100">Preço (entre $80 e $100)</option>
+              <option value="date-2023">Data de 2023</option>
+              <option value="date-2022">Data de 2022</option>
+            </select>
+          </div>
         </div>
       </section>
-      {sortedProducts.map((product) => (
-        <ProductCard key={product.id} {...product} />
-      ))}
+      <section>
+        {sortedProducts.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
+      </section>
     </main>
   ) : (
     <p>Carregando</p>

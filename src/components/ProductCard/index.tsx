@@ -1,11 +1,14 @@
 import React, { useState } from "react"
+import Image from "next/image"
 import { useProductContext } from "../../contexts/ProductContext"
+import styles from "./ProductCard.module.css"
 
 interface ProductCardProps {
   id: number
   name: string
   price: number
   date?: Date
+  img?: any
 }
 
 const formatDate = (date?: Date): string => {
@@ -17,7 +20,7 @@ const formatDate = (date?: Date): string => {
   return new Intl.DateTimeFormat("pt-BR", options).format(date)
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, date }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, date, img }) => {
   const { addToCart } = useProductContext()
   const [quantity, setQuantity] = useState(1)
 
@@ -37,26 +40,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, price, date }) => {
   }
 
   return (
-    <div>
-      <img
-        src={`https://via.placeholder.com/150/CCCCCC/FFFFFF?text=${encodeURIComponent(
-          name
-        )}`}
-        alt={name}
-      />
-      <h3>{name}</h3>
-      <p>Preço: ${price}</p>
-      <p>Incluído em: {formatDate(date)}</p>
-      <label>
-        Quantidade:
-        <input
-          type="number"
-          min="1"
-          value={quantity}
-          onChange={handleQuantityChange}
-        />
-      </label>
-      <button onClick={handleAddToCart}>Adicionar ao Carrinho</button>
+    <div className={styles.productCard}>
+      <Image src={img} width={200} height={200} alt={name} />
+      <div className={styles.details}>
+        <h3>{name}</h3>
+        <p className={styles.price}>
+          Preço: <span> R${price}</span>
+        </p>
+        <p>Incluído em: {formatDate(date)}</p>
+        <label>
+          Quantidade:
+          <input
+            type="number"
+            min="1"
+            value={quantity}
+            onChange={handleQuantityChange}
+          />
+        </label>
+        <button onClick={handleAddToCart}>Adicionar ao Carrinho</button>
+      </div>
     </div>
   )
 }

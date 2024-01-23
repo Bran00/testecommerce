@@ -27,24 +27,24 @@ export default function Checkout() {
 
   return (
     <div className={styles.checkout}>
-      <h1>Checkout</h1>
+      <h1>Carrinho</h1>
       <div className={styles.cartItems}>
         <h2>Itens no Carrinho</h2>
         {cart.map((item) => (
           <div className={styles.cartItem} key={item.product.id}>
             <p>
-              {item.product.name} - ${item.product.price} x {item.quantity}
+              {item.product.name} - R${item.product.price} x {item.quantity}
+            </p>
               <button onClick={() => handleRemoveFromCart(item.product.id)}>
                 Remover
               </button>
-            </p>
           </div>
         ))}
       </div>
       <div className={styles.total}>
-        <h2>Total: ${calculateTotal()}</h2>
+        <h2>Total: R${calculateTotal()}</h2>
       </div>
-      <button onClick={handleCheckout}>Finalizar Compra</button>
+      <button className={cart.length === 0 ? styles.hidden : styles.block} onClick={handleCheckout}>Finalizar Compra</button>
     </div>
   )
 }
