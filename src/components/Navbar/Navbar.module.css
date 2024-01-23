@@ -43,6 +43,7 @@
 
 .navbar .cartOverlay {
   position: absolute;
+  
   right: 3rem;
   top: 5rem;
   border-radius: 1rem 0 1rem 1rem;
@@ -61,9 +62,39 @@
 .navbar .cartOverlay ul {
   text-decoration: none;
   padding: 0 2rem;
+  overflow-y: auto;
   display: flex;
+  height: 40rem;
   gap: 1rem;
   flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(0, 0%, 53%) hsl(0, 0%, 95%);
+}
+
+.navbar .cartOverlay ul::-webkit-scrollbar {
+  width: 1rem;
+}
+
+.navbar .cartOverlay ul::-webkit-scrollbar-thumb {
+  background-color: hsl(0, 0%, 53%);
+  border-radius: .5rem;
+}
+
+.navbar .cartOverlay ul::-webkit-scrollbar-track {
+  background-color: hsl(0, 0%, 95%);
+}
+
+.navbar .cartOverlay ul::-moz-scrollbar {
+  width: 1rem;
+}
+
+.navbar .cartOverlay ul::-moz-scrollbar-thumb {
+  background-color: hsl(0, 0%, 53%);
+  border-radius: .5rem;
+}
+
+.navbar .cartOverlay ul::-moz-scrollbar-track {
+  background-color: hsl(0, 0%, 95%);
 }
 
 .navbar .cartOverlay ul li {
