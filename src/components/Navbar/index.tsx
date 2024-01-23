@@ -1,8 +1,10 @@
 "use client"
 import React, { useState } from "react"
-import styles from "./Navbar.module.css"
 import { useProductContext } from "@/contexts/ProductContext"
 import Link from "next/link"
+
+import { FaShoppingCart } from "react-icons/fa"
+import styles from "./Navbar.module.css"
 
 const Navbar: React.FC = () => {
   const { cart, calculateTotal, clearCart, removeFromCart } =
@@ -17,16 +19,13 @@ const Navbar: React.FC = () => {
     removeFromCart(productId)
   }
 
-  const handleCheckout = () => {
-
-    console.log("Checkout clicado")
-  }
-
   return (
     <div className={styles.navbar}>
-      <div className={styles.logo}>Soja Nova</div>
+      <Link href="/" className={styles.logo}>
+        Soja Nova
+      </Link>
       <div className={styles.cartIcon} onClick={handleToggleCart}>
-        <img src="/cart-icon.png" alt="Carrinho de Compras" />
+        <FaShoppingCart />
         {cart.length > 0 && (
           <span className={styles.cartCount}>{cart.length}</span>
         )}
@@ -44,7 +43,9 @@ const Navbar: React.FC = () => {
                     <li key={item.product.id}>
                       <span>{item.product.name}</span>
                       <span>Quantidade: {item.quantity}</span>
-                      <span>Preço: ${item.product.price}</span>
+                      <span>
+                        Preço: <strong>R${item.product.price}</strong>
+                      </span>
                       <button
                         onClick={() => handleRemoveFromCart(item.product.id)}
                       >
@@ -53,11 +54,14 @@ const Navbar: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-                <p>Total: ${calculateTotal()}</p>
-                <Link  href="/checkout" className={cart.length === 0 ? styles.hidden : styles.checkout}>
-                  Checkout
+                <p>
+                  Total: <span>R${calculateTotal()}</span>
+                </p>
+                <Link href="/checkout" className={styles.checkout}>
+                  Finalizar Compra
                 </Link>
-                <button onClick={clearCart}>Limpar Carrinho</button>
+                <button  className={styles.clearCart}
+                onClick={clearCart}>Limpar Carrinho</button>
               </>
             )}
           </div>
