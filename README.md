@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Teste E-commerce(Soja Nova)
 
-## Getting Started
+## Descrição
 
-First, run the development server:
+Este é um projeto de exemplo para um e-commerce desenvolvido com Next.js e React. O objetivo deste projeto é fornecer um exemplo simples de como criar uma aplicação de comércio eletrônico usando as tecnologias mencionadas.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Pré-requisitos
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Antes de começar, certifique-se de ter o Node.js instalado em sua máquina. Você pode baixá-lo [aqui](https://nodejs.org/).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Instalação
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Clone o repositório:
 
-## Learn More
+2. Acesse o diretório do projeto:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   cd testecommerce
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Instale as dependências:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+## Scripts Disponíveis
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+No diretório do projeto, você pode executar os seguintes scripts:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Modo de Desenvolvimento:**
+
+  ```bash
+  npm run dev
+  ```
+
+  Inicia o aplicativo no modo de desenvolvimento. Abra [http://localhost:3000](http://localhost:3000) para visualizá-lo no navegador.
+
+- **Compilar para Produção:**
+
+  ```bash
+  npm run build
+  ```
+
+  Compila o aplicativo para produção na pasta `.next`.
+
+- **Iniciar em Produção:**
+
+  ```bash
+  npm start
+  ```
+
+  Inicia o aplicativo compilado em modo de produção.
+
+- **Análise de Estilo de Código:**
+
+  ```bash
+  npm run lint
+  ```
+
+  Executa a análise de estilo de código usando o ESLint.
+
+## Tecnologias Utilizadas
+
+- [Next.js](https://nextjs.org/) - O framework React para produção.
+- [React](https://reactjs.org/) - Biblioteca para construção de interfaces.
+- [React Icons](https://react-icons.github.io/react-icons/) - Pacote de ícones para React.
+
+## Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir problemas ou enviar pull requests.
+
+## Licença
+
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
+
+---
+
+Espero que este readme seja útil para o seu projeto. Lembre-se de personalizá-lo de acordo com as necessidades específicas do seu aplicativo.
